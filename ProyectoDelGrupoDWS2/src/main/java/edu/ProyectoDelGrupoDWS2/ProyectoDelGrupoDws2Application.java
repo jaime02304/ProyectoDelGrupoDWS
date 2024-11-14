@@ -1,13 +1,13 @@
-package edu.ProyectoDelGrupoDWS;
+package edu.ProyectoDelGrupoDWS2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoDelGrupoDwsApplication {
+public class ProyectoDelGrupoDws2Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoDelGrupoDwsApplication.class, args);
+		SpringApplication.run(ProyectoDelGrupoDws2Application.class, args);
 	}
 
 }
