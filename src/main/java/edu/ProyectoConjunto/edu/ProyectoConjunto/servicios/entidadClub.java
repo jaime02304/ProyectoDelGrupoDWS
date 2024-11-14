@@ -10,7 +10,7 @@ import java.util.List;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 
 /**
- * Entidad que representa la tabla Club.
+ * Entidad que representa la tabla Club. 	
  */
 @Entity
 public class entidadClub {

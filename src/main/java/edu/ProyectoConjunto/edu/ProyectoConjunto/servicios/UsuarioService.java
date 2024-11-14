@@ -1,7 +1,5 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.servicios;
 
-import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.entidadUsuario;
-import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.usuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

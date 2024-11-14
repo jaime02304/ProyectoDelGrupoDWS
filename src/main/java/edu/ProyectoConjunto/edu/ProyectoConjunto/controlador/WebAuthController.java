@@ -1,25 +1,24 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.controlador;
 
-
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
-import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.usuarioImplementacion;
+import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class WebAuthController {
 
     private final UsuarioService usuarioService;
 
     @Autowired
-    public AuthController(UsuarioService usuarioService) {
+    public WebAuthController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UsuarioDto usuarioDto) {
+    public ResponseEntity<String> login(@RequestBody usuarioDto usuarioDto) {
         // Autenticar al usuario solo con correoUsuario y contraseniaUsuario
         boolean authenticated = usuarioService.authenticate(usuarioDto.getCorreoUsuario(), usuarioDto.getContraseniaUsuario());
 
@@ -36,3 +35,4 @@ public class AuthController {
         }
     }
 }
+
