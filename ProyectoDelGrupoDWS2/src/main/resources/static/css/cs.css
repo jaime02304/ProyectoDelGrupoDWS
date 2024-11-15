@@ -274,6 +274,8 @@ p {
 .divCorreo {
 	height: 80px;
 	margin: 0px 0px 10%;
+	display: flex;
+	justify-content: center;
 }
 
 .correo {
@@ -291,6 +293,8 @@ p {
 
 .divContra {
 	height: 80px;
+	display: flex;
+	justify-content: center;
 }
 
 .contrasenia {
