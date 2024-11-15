@@ -1,54 +1,56 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.servicios;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /**
  * Clase donde se encuentra la representación del objeto usuario
  */
 @Entity
+@Table(name = "USUARIOS")
 public class entidadUsuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
     private Long idUsuario;
 
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombreUsuario")
     private String nombreUsuario;
 
-    @Column(name = "apellido_usuario")
+    @Column(name = "apellidoUsuario")
     private String apellidoUsuario;
 
-    @Column(name = "correo_usuario", unique = true, nullable = false)
+    @Column(name = "correoUsuario", unique = true, nullable = false)
     private String correoUsuario;
 
-    @Column(name = "contrasenia_usuario")
+    @Column(name = "contraseniaUsuario")
     private String contraseniaUsuario;
 
-    @Column(name = "dni_usuario", unique = true)
+    @Column(name = "dniUsuario", unique = true)
     private String dniUsuario;
 
-    @Column(name = "es_admin")
+    @Column(name = "esAdmin")
     private Boolean esAdmin;
 
     @Lob // Usado para tipos grandes como imágenes
-    @Column(name = "imagen_usuario")
+    @Column(name = "imagenUsuario")
     private byte[] imagenUsuario; // Imagen como array de bytes
-
-    @Column(name = "direccion")
+    
+    @Column(name = "Direccion")
     private String direccion;
 
-    @Column(name = "alias")
+    @Column(name = "Alias")
     private String alias;
 
     // Relación ManyToOne con Club
     @ManyToOne
-    @Column(name = "id_club_perteneciente") // El campo que se guarda en la tabla Usuario como FK
+    @JoinColumn(name = "club_id", nullable = false)
     private entidadClub clubPerteneciente;
 
     // Constructor vacío (requerido por JPA)
@@ -69,7 +71,7 @@ public class entidadUsuario {
         this.imagenUsuario = imagenUsuario;
         this.direccion = direccion;
         this.alias = alias;
-        this.clubPerteneciente = clubPerteneciente;
+        //this.clubPerteneciente = clubPerteneciente;
     }
 
     // Getters y setters

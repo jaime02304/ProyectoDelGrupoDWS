@@ -1,40 +1,42 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.servicios;
 
+import java.util.List;
+
+import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Column;
-import java.util.List;
-
-import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
+import jakarta.persistence.Table;
 
 /**
  * Entidad que representa la tabla Club. 	
  */
 @Entity
+@Table(name = "CLUB")
 public class entidadClub {
 
     @Id
     private Long idClub;
 
-    @Column(name = "nombre_club")
+    @Column(name = "nombreClub")
     private String nombreClub;
 
-    @Column(name = "correo_club", unique = true, nullable = false)
+    @Column(name = "correoClub", unique = true, nullable = false)
     private String correoClub;
 
-    @Column(name = "contrasenia_club")
+    @Column(name = "contraseniaClub")
     private String contraseniaClub;
 
-    @Column(name = "sede_principal_club")
+    @Column(name = "sedePrincipalClub")
     private String sedePrincipalClub;
 
-    @Column(name = "localidad_club")
+    @Column(name = "localidadClub")
     private String localidadClub;
 
     @Lob // Usado para almacenar tipos de datos grandes como imágenes
-    @Column(name = "imagen_club")
+    @Column(name = "imagenClub")
     private byte[] imagenClub; // Imagen como array de bytes
 
     // Relación 1:N con Usuario
