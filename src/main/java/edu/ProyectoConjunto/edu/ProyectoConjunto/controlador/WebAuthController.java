@@ -2,6 +2,9 @@ package edu.ProyectoConjunto.edu.ProyectoConjunto.controlador;
 
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.UsuarioService;
+import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.entidadUsuario;
+import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.usuarioRepositorio;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class WebAuthController {
 
     private final UsuarioService usuarioService;
+    private  usuarioRepositorio usuarioRepositorio;
 
     @Autowired
     public WebAuthController(UsuarioService usuarioService) {
@@ -32,6 +36,16 @@ public class WebAuthController {
             }
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");  // Si las credenciales son incorrectas
+        }
+    }
+
+    @PostMapping("/registro")
+    public ResponseEntity<String> register(@RequestBody usuarioDto usuarioDto) {
+        boolean registrado = usuarioService.registroUser(usuarioDto);
+        if (registrado) {
+            return ResponseEntity.ok("Usuario registrado con éxito");
+        } else {
+            return ResponseEntity.status(400).body("El correo ya está en uso");
         }
     }
 }
