@@ -10,10 +10,14 @@
 //	})
 //		.then(response => response.json()) // Convierte la respuesta a JSON
 //		.then(data => {
-//			if (data == "admin") { 
-//				window.location.href = "dashboard.html"; // Redirige a la página de éxito
-//			} else if (data == "user") {
-//				alert("Credenciales inválidas"); // Muestra un mensaje de error
+//			if (data.success) { // Si la respuesta es exitosa
+//				if (data.isAdmin) { // Si es administrador
+//					window.location.href = "dashboardAdmin.html"; // Redirige al dashboard de administrador
+//				} else { // Si es un usuario normal
+//					window.location.href = "dashboardUser.html"; // Redirige al dashboard de usuario
+//				}
+//			} else { // Si la respuesta tiene success: false
+//				alert(data.message || "Credenciales inválidas"); // Muestra el mensaje de error
 //			}
 //		})
 //		.catch(error => {

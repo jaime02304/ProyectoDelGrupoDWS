@@ -1,28 +1,29 @@
 package edu.ProyectoDelGrupoDWS2.controladores;
 
-import org.apache.catalina.connector.Response;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
+import edu.ProyectoDelGrupoDWS2.Servicios.loginImplementacion;
+import edu.ProyectoDelGrupoDWS2.Servicios.loginInterfaz;
 
 @RestController
+@RequestMapping("/login")
 public class loginControlador {
 
+	loginInterfaz metodosLogin = new loginImplementacion();
+	
 	// Mapea la ruta "/login"
-	@GetMapping("/login")
 	public ModelAndView login() {
 		return new ModelAndView("login"); // Renderiza la página de login
 	}
-
-	@PostMapping("/login/accederUsuario")
-	public Response postMethodName(@ModelAttribute UsuariosDto usuario) throws Exception {
-
-		return Response;
+	
+	public ResponseEntity<?> metodoDeLoguearse(@ModelAttribute UsuariosDto usuarios){
+		return metodoDeLoguearse(usuarios);
 	}
+
 
 }
