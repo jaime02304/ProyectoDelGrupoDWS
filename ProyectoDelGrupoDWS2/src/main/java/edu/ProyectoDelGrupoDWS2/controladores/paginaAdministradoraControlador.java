@@ -1,14 +1,18 @@
 package edu.ProyectoDelGrupoDWS2.controladores;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class paginaAdministradoraControlador {
 
 	// Mapea la ruta "/paginaAdministradora"
 	@GetMapping("/paginaAdministradora")
-	public String paginaAdministradora() {
-		return "paginaAdministradora"; // Renderiza la página de administrador
+	public ModelAndView paginaAdministradora() {
+		return  new ModelAndView( "paginaAdministradora"); // Renderiza la página de administrador
 	}
+
+//	@GetMapping("/login/accederUsuario")
+//	public
 }
