@@ -29,23 +29,23 @@
 			<div class="col zonaLoginForm">
 
 				<!-- Formulario con Thymeleaf -->
-				<form class="w-100 formulario" th:action="@{/login/enviarDatos}" method="post">
+				<form class="w-100 formulario" th:action="@{/login}" method="post">
 					<h1 class="nombreLogin">LOGIN</h1>
 					<div class="contenidoLogin">
 						<div class="divCorreo">
 							<!-- Campo de correo con Thymeleaf -->
 							<input type="email" placeholder="Correo electrónico"
-								class="correo" th:name="email" />
+								class="correo" th:name="correoUsu" required />
 						</div>
 						<div class="divContra">
 							<!-- Campo de contraseña con Thymeleaf -->
 							<input type="password" placeholder="Contraseña"
-								class="contrasenia" th:name="password" />
+								class="contrasenia" th:name="contraseniaUsu" required />
 						</div>
 						<div class="form-check divCheckbox">
 							<!-- Checkbox con Thymeleaf -->
 							<input class="form-check-input recuerdame" type="checkbox"
-								value="" id="flexCheckDefault" th:name="rememberMe" /> <label
+								value="" id="flexCheckDefault"/> <label
 								class="form-check-label labelRecuerdame" for="flexCheckDefault">
 								Recuérdame </label>
 						</div>

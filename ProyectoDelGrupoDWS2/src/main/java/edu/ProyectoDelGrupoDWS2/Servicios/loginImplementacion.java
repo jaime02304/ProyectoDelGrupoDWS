@@ -63,7 +63,7 @@ public class loginImplementacion{
 		RestTemplate manejosRespuestaRestTemplate = new RestTemplate();
 
 		// Enviar solicitud POST y recibir respuesta
-		ResponseEntity<String> respuestaApi = manejosRespuestaRestTemplate.exchange("#", HttpMethod.POST, solicitudEntidad,
+		ResponseEntity<String> respuestaApi = manejosRespuestaRestTemplate.exchange("http://localhost:8080/AplicacioPrueba/usuarios/enviarDatos", HttpMethod.POST, solicitudEntidad,
 				String.class);
 
 		return devolverRespuestaFrontMetodoPrivado(respuestaApi);
