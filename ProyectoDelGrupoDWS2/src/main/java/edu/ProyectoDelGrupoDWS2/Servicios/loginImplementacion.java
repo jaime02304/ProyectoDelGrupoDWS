@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Util.utilidades;
 
-public class loginImplementacion implements loginInterfaz {
+@Service
+public class loginImplementacion{
 
 	private utilidades util = new utilidades();
 
