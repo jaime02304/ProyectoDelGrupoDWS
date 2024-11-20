@@ -14,13 +14,12 @@ import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Servicios.loginImplementacion;
 
 @RestController
-@RequestMapping("/login")
 public class loginControlador {
 
 	@Autowired
 	loginImplementacion metodosLogin;
 
-	@GetMapping("/")
+	@GetMapping("/login")
 	public ModelAndView login() {
 		return new ModelAndView("login"); // Renderiza la página de login
 	}
