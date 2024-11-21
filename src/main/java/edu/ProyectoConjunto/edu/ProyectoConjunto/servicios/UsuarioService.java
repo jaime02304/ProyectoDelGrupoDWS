@@ -17,17 +17,14 @@ public class UsuarioService {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    // Autenticar al usuario solo con correoUsuario y contraseniaUsuario
-    public boolean authenticate(String correoUsuario, String contraseniaUsuario) {
-        entidadUsuario usuario = usuarioRepositorio.findByCorreoUsuario(correoUsuario);  // Buscar usuario por correo
-        return usuario != null && usuario.getContraseniaUsuario().equals(contraseniaUsuario);  // Validar contraseña
-    }
-
-    // Verificar si el usuario es administrador
-    public boolean isAdmin(String correoUsuario) {
-    	entidadUsuario usuario = usuarioRepositorio.findByCorreoUsuario(correoUsuario);  // Buscar usuario por correo
-        return usuario != null && usuario.getEsAdmin();  // Verificar si es administrador
-    }
+	 //Método para verificar si el usuario existe y si la contraseña es correcta
+	    public entidadUsuario verificarUsuario(String correoUsuario, String contraseniaUsuario) {
+	        entidadUsuario usuario = usuarioRepositorio.findByCorreoUsuario(correoUsuario);
+	        if (usuario != null && passwordEncoder.matches(contraseniaUsuario, usuario.getContraseniaUsuario())) {
+	            return usuario; // Retorna el usuario si la contraseña es correcta
+	        }
+	        return null; // Retorna null si no se encuentra el usuario o la contraseña es incorrecta
+	    }
     
     
     	public boolean registroUser (usuarioDto usuarioDto) {

@@ -21,21 +21,19 @@ public class WebAuthController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody usuarioDto usuarioDto) {
-        // Autenticar al usuario solo con correoUsuario y contraseniaUsuario
-        boolean authenticated = usuarioService.authenticate(usuarioDto.getCorreoUsuario(), usuarioDto.getContraseniaUsuario());
-
-        if (authenticated) {
-            // Verificar si es admin o no
-            boolean isAdmin = usuarioService.isAdmin(usuarioDto.getCorreoUsuario());
+    @GetMapping("/verificarUsuario")
+    public ResponseEntity<String> verificarUsuario(@RequestParam String correoUsuario, @RequestParam String contraseniaUsuario) {
+        entidadUsuario usuario = usuarioService.verificarUsuario(correoUsuario, contraseniaUsuario);
+        
+        if (usuario != null) {
+            boolean isAdmin = usuario.getEsAdmin();
             if (isAdmin) {
-                return ResponseEntity.ok("admin");  // Si es admin
+                return ResponseEntity.ok("{\"success\": true, \"isAdmin\": true}");
             } else {
-                return ResponseEntity.ok("user");  // Si no es admin
+                return ResponseEntity.ok("{\"success\": true, \"isAdmin\": false}");
             }
         } else {
-            return ResponseEntity.status(401).body("Invalid credentials");  // Si las credenciales son incorrectas
+            return ResponseEntity.ok("{\"success\": false, \"isAdmin\": false}"); // Usuario no encontrado o contraseña incorrecta
         }
     }
 
