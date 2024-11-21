@@ -6,8 +6,11 @@ package edu.ProyectoDelGrupoDWS2.Dtos;
  */
 public class UsuariosDto {
 
-	private String correoUsu="aaaaa";
+
+	private String correoUsu = "aaaaa";
 	private String contraseniaUsu = "aaaaa";
+	private boolean esAdmin=false;
+
 	
 	public String getCorreoUsu() {
 		return correoUsu;
@@ -21,5 +24,13 @@ public class UsuariosDto {
 	public void setContraseniaUsu(String contraseniaUsu) {
 		this.contraseniaUsu = contraseniaUsu;
 	}
+	public boolean EsAdmin() {
+		return esAdmin;
+	}
+	public void setEsAdmin(boolean esAdmin) {
+		this.esAdmin = esAdmin;
+	}
+	
+	
 
 }

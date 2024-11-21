@@ -2,22 +2,17 @@ package edu.ProyectoDelGrupoDWS2.Servicios;
 
 import java.util.regex.Pattern;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Util.utilidades;
+import jakarta.ws.rs.client.ClientBuilder;
 
 @Service
-public class loginImplementacion{
+public class loginImplementacion {
 
 	private utilidades util = new utilidades();
 
@@ -38,71 +33,37 @@ public class loginImplementacion{
 		return email1.matcher(email).matches();
 	}
 
-	public ResponseEntity<?> enviarDatosLogin(UsuariosDto usuario) throws Exception {
+	public ModelAndView enviarDatosLogin(UsuariosDto usuario) throws Exception {
 
 		if (!validarEmail(usuario.getCorreoUsu())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{\"success\": false, \"message\": \"Formato del email invalido\"}");
-
+			System.out.println("Error al validar la contraseña");
 		}
-		// Encriptar la contraseña antes de enviar
+
 		usuario.setContraseniaUsu(util.encriptarContrasenia(usuario.getContraseniaUsu()));
 
-		// Serializar la lista de usuarios a JSON
-		ObjectMapper objetoMapper = new ObjectMapper();
-		String usuariosJson = objetoMapper.writeValueAsString(usuario);
+		ObjectMapper objetoMapeador = new ObjectMapper();
+		String formatoJson = objetoMapeador.writeValueAsString(usuario);
 
-		// Configurar encabezados HTTP
-		HttpHeaders encabezado = new HttpHeaders();
-		encabezado.setContentType(MediaType.APPLICATION_JSON);
+		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
 
-		// Crear entidad HTTP (cuerpo + encabezados)
-		HttpEntity<String> solicitudEntidad = new HttpEntity<>(usuariosJson, encabezado);
+		jakarta.ws.rs.core.Response respuestaApi = cliente
+				.target("http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
+						+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu())
+				.request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
 
-		// Crear instancia de RestTemplate
-		RestTemplate manejosRespuestaRestTemplate = new RestTemplate();
+		System.out.println(respuestaApi.getStatus());
+		if (respuestaApi.getStatus() == 200) {
 
-		// Enviar solicitud POST y recibir respuesta
-		ResponseEntity<String> respuestaApi = manejosRespuestaRestTemplate.exchange("http://localhost:8080/AplicacioPrueba/usuarios/enviarDatos", HttpMethod.POST, solicitudEntidad,
-				String.class);
+			UsuariosDto respuestaCuerpoApi = respuestaApi.readEntity(UsuariosDto.class);
 
-		return devolverRespuestaFrontMetodoPrivado(respuestaApi);
-
-	}
-
-	/**
-	 * Metodo privado para separar y limpiar el codigo, devuelve la respuesta para
-	 * la parte vista
-	 * 
-	 * @author jpribio - 19/11/24
-	 * @param Respuesta de la API
-	 * @return devuelve una respuesta para la parte vista
-	 */
-	private ResponseEntity<?> devolverRespuestaFrontMetodoPrivado(ResponseEntity<String> respuestaApi) {
-
-		// Procesar la respuesta de la API externa
-		if (respuestaApi.getStatusCode() == HttpStatus.OK) {
-			String cuerpoRespuesta = respuestaApi.getBody();
-
-			// Verificar si la respuesta contiene el campo "success" como true
-			if (cuerpoRespuesta != null && cuerpoRespuesta.contains("\"success\": true")) {
-				// Aquí asumimos que la API devuelve un campo "isAdmin" indicando si el usuario
-				// es admin
-				boolean isAdmin = cuerpoRespuesta.contains("\"isAdmin\": true");
-
-				// Devolver la respuesta a frontend con el estado del usuario
-				if (isAdmin) {
-					return ResponseEntity.ok("{\"success\": true, \"isAdmin\": true}");
-				} else {
-					return ResponseEntity.ok("{\"success\": true, \"isAdmin\": false}");
-				}
+			if (respuestaCuerpoApi.EsAdmin()) {
+				return new ModelAndView("index");
 			} else {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-						.body("{\"success\": false, \"message\": \"Credenciales invalidas\"}");
+				return new ModelAndView("index");
 			}
 		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"success\": false, \"message\": \"Error con la API externa\"}");
+			return new ModelAndView("login");
 		}
 	}
+
 }
