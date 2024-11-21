@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 
+
 @Service
 public class UsuarioService {
 
@@ -17,17 +18,6 @@ public class UsuarioService {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-	 //Método para verificar si el usuario existe y si la contraseña es correcta
-//	    public entidadUsuario verificarUsuario(String correoUsuario, String contraseniaUsuario) {
-//	        entidadUsuario usuario = usuarioRepositorio.findByCorreoUsuario(correoUsuario);
-//	        /*if (usuario != null && passwordEncoder.matches(contraseniaUsuario, usuario.getContraseniaUsuario())) {
-//	            return usuario; // Retorna el usuario si la contraseña es correcta
-//	        }*/
-//	        if (usuario != null && usuario.getContraseniaUsuario().equals(contraseniaUsuario)) {
-//	            return usuario; // Credenciales correctas
-//	        }
-//	        return null; // Retorna null si no se encuentra el usuario o la contraseña es incorrecta
-//	    }
     
     public entidadUsuario verificarUsuario(String correoUsuario, String contraseniaUsuario) {
         System.out.println("Verificando usuario: " + correoUsuario);
@@ -49,28 +39,22 @@ public class UsuarioService {
     }
     
     
-    	public boolean registroUser (usuarioDto usuarioDto) {
-    	
-        // Verificar si el correo ya está en uso
-		if (usuarioRepositorio.findByCorreoUsuario(usuarioDto.getCorreoUsuario()) != null) {
-		    return false; // El usuario ya existe
-		}
-		
-		// Crear nueva entidad de usuario
-		entidadUsuario nuevoUsuario = new entidadUsuario();
-		nuevoUsuario.setNombreUsuario(usuarioDto.getNombreUsuario());
-		nuevoUsuario.setApellidoUsuario(usuarioDto.getApellidoUsuario());
-		nuevoUsuario.setCorreoUsuario(usuarioDto.getCorreoUsuario());
-		//nuevoUsuario.setContraseniaUsuario(passwordEncoder.encode(usuarioDto.getContraseniaUsuario())); // Hashear la contraseña
-		nuevoUsuario.setDniUsuario(usuarioDto.getDniUsuario());
-		nuevoUsuario.setEsAdmin(usuarioDto.getEsAdmin());
-		nuevoUsuario.setImagenUsuario(usuarioDto.getImagenUsuario());
-		nuevoUsuario.setDireccion(usuarioDto.getDireccion());
-		nuevoUsuario.setAlias(usuarioDto.getAlias());
-		// Aquí puedes establecer el clubPerteneciente si es necesario
-		
-		// Guardar el nuevo usuario en la base de datos
-		usuarioRepositorio.save(nuevoUsuario);
-		return true; // Registro exitoso
-		}
+ // Método en UsuarioService
+    public void crearUsuario(usuarioDto usuarioDTO) {
+        // Convertir el DTO a la entidad
+        entidadUsuario nuevoUsuario = new entidadUsuario();
+        nuevoUsuario.setNombreUsuario(usuarioDTO.getNombreUsuario());
+        nuevoUsuario.setApellidoUsuario(usuarioDTO.getApellidoUsuario());
+        nuevoUsuario.setCorreoUsuario(usuarioDTO.getCorreoUsuario());
+        nuevoUsuario.setContraseniaUsuario(usuarioDTO.getContraseniaUsuario());
+        nuevoUsuario.setDniUsuario(usuarioDTO.getDniUsuario());
+        nuevoUsuario.setEsAdmin(usuarioDTO.getEsAdmin());
+        nuevoUsuario.setImagenUsuario(usuarioDTO.getImagenUsuario());
+        nuevoUsuario.setDireccion(usuarioDTO.getDireccion());
+        nuevoUsuario.setAlias(usuarioDTO.getAlias());
+        // nuevoUsuario.setClubPerteneciente(usuarioDTO.getClubPerteneciente());
+
+        // Guardar el nuevo usuario en la base de datos
+        usuarioRepositorio.save(nuevoUsuario);
+    }
 }
