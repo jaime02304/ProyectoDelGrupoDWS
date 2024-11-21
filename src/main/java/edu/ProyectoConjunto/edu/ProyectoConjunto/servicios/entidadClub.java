@@ -40,8 +40,8 @@ public class entidadClub {
     private byte[] imagenClub; // Imagen como array de bytes
 
     // Relación 1:N con Usuario
-    @OneToMany(mappedBy = "clubPerteneciente")  // "clubPerteneciente" es el nombre del campo en Usuario que tiene la relación
-    private List<usuarioDto> usuarios;
+    //@OneToMany(mappedBy = "clubPerteneciente")  // "clubPerteneciente" es el nombre del campo en Usuario que tiene la relación
+    //private List<entidadUsuario> usuarios;
 
     // Constructor vacío (requerido por JPA)
     public entidadClub() {}
@@ -115,12 +115,12 @@ public class entidadClub {
         this.imagenClub = imagenClub;
     }
 
-    public List<usuarioDto> getUsuarios() {
+    /*public List<entidadUsuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(List<usuarioDto> usuarios) {
+    public void setUsuarios(List<entidadUsuario> usuarios) {
         this.usuarios = usuarios;
-    }
+    }*/
 }
 

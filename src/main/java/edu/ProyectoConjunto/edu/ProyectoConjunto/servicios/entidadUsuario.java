@@ -12,46 +12,46 @@ import jakarta.persistence.Table;
  * Clase donde se encuentra la representación del objeto usuario
  */
 @Entity
-@Table(name = "USUARIOS")
+@Table(name = "usuarios")
 public class entidadUsuario {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idUsuario")
+    @Column(name = "id_usuario")
     private Long idUsuario;
 
-    @Column(name = "nombreUsuario")
+    @Column(name = "nombre_usuario")
     private String nombreUsuario;
 
-    @Column(name = "apellidoUsuario")
+    @Column(name = "apellido_usuario")
     private String apellidoUsuario;
 
-    @Column(name = "correoUsuario", unique = true, nullable = false)
+    @Column(name = "correo_usuario", unique = true, nullable = false)
     private String correoUsuario;
 
-    @Column(name = "contraseniaUsuario")
+    @Column(name = "contrasenia_usuario")
     private String contraseniaUsuario;
 
-    @Column(name = "dniUsuario", unique = true)
+    @Column(name = "dni_usuario", unique = true)
     private String dniUsuario;
 
-    @Column(name = "esAdmin")
+    @Column(name = "es_admin")
     private Boolean esAdmin;
 
     @Lob // Usado para tipos grandes como imágenes
-    @Column(name = "imagenUsuario")
+    @Column(name = "imagen_usuario")
     private byte[] imagenUsuario; // Imagen como array de bytes
     
-    @Column(name = "Direccion")
+    @Column(name = "direccion")
     private String direccion;
 
-    @Column(name = "Alias")
+    @Column(name = "alias")
     private String alias;
 
     // Relación ManyToOne con Club
-    @ManyToOne
-    @JoinColumn(name = "club_id", nullable = false)
-    private entidadClub clubPerteneciente;
+    //@ManyToOne
+    //@JoinColumn(name = "club_id", nullable = false)
+    //private entidadClub clubPerteneciente;
 
     // Constructor vacío (requerido por JPA)
     public entidadUsuario() {}
@@ -156,11 +156,11 @@ public class entidadUsuario {
         this.alias = alias;
     }
 
-    public entidadClub getClubPerteneciente() {
+    /*public entidadClub getClubPerteneciente() {
         return clubPerteneciente;
     }
 
     public void setClubPerteneciente(entidadClub clubPerteneciente) {
         this.clubPerteneciente = clubPerteneciente;
-    }
+    }*/
 }
