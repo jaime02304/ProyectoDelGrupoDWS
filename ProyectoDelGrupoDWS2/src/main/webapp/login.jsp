@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,13 +11,13 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
-<link rel="stylesheet" th:href="@{/css/cs.css}" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navegador2">
 		<!-- Enlace con Thymeleaf -->
-		<a th:href="@{/}"> <svg xmlns="http://www.w3.org/2000/svg"
+		<a href="${pageContext.request.contextPath}/"> <svg xmlns="http://www.w3.org/2000/svg"
 				width="60" height="60" fill="currentColor"
 				class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -29,23 +31,23 @@
 			<div class="col zonaLoginForm">
 
 				<!-- Formulario con Thymeleaf -->
-				<form class="w-100 formulario" th:action="@{/login}" method="post">
+				<form class="w-100 formulario" action="${pageContext.request.contextPath}/login/verificarElUsuario" method="post">
 					<h1 class="nombreLogin">LOGIN</h1>
 					<div class="contenidoLogin">
 						<div class="divCorreo">
 							<!-- Campo de correo con Thymeleaf -->
 							<input type="email" placeholder="Correo electrónico"
-								class="correo" th:name="correoUsu" required />
+								class="correo" name="correoUsu" required />
 						</div>
 						<div class="divContra">
 							<!-- Campo de contraseña con Thymeleaf -->
 							<input type="password" placeholder="Contraseña"
-								class="contrasenia" th:name="contraseniaUsu" required />
+								class="contrasenia" name="contraseniaUsu" required />
 						</div>
 						<div class="form-check divCheckbox">
 							<!-- Checkbox con Thymeleaf -->
 							<input class="form-check-input recuerdame" type="checkbox"
-								value="" id="flexCheckDefault"/> <label
+								value="" id="flexCheckDefault" /> <label
 								class="form-check-label labelRecuerdame" for="flexCheckDefault">
 								Recuérdame </label>
 						</div>
@@ -60,11 +62,11 @@
 			<div class="col d-lg-block d-none zonaLoginImagenes">
 				<!-- Imágenes con Thymeleaf -->
 				<div class="image-box1 top">
-					<img th:src="@{/images/motoAzul.jpg}" alt="Imagen de moto 1"
+					<img src="${pageContext.request.contextPath}/images/motoAzul.jpg" alt="Imagen de moto 1"
 						class="imagen1" />
 				</div>
 				<div class="image-box">
-					<img th:src="@{/images/descarga.jpg}" alt="Imagen de moto 2"
+					<img src="${pageContext.request.contextPath}/images/descarga.jpg" alt="Imagen de moto 2"
 						class="imagen2" />
 				</div>
 			</div>
@@ -77,6 +79,6 @@
 		crossorigin="anonymous"></script>
 
 	<!-- Ruta de archivo JavaScript con Thymeleaf -->
-	<script th:src="@{/js/javascript.js}"></script>
+	<script src="${pageContext.request.contextPath}/js/javascript.js"></script>
 </body>
 </html>

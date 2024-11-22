@@ -47,7 +47,7 @@ public class loginImplementacion {
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente
-				.target("http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
+				.target("http://192.168.30.150:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
 						+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu())
 				.request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
 

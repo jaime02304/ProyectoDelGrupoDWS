@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,13 +11,13 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
-<link rel="stylesheet" th:href="@{/css/cs.css}" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navegador2">
 		<!-- Enlace a la página principal con Thymeleaf -->
-		<a th:href="@{/}"> <svg xmlns="http://www.w3.org/2000/svg"
+		<a href="${pageContext.request.contextPath}/"> <svg xmlns="http://www.w3.org/2000/svg"
 				width="60" height="60" fill="currentColor"
 				class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -157,6 +159,6 @@
 		crossorigin="anonymous"></script>
 
 	<!-- Enlaza el script JavaScript con Thymeleaf -->
-	<script th:src="@{/javascript.js}"></script>
+	<script src="${pageContext.request.contextPath}/javascript.js"></script>
 </body>
 </html>
