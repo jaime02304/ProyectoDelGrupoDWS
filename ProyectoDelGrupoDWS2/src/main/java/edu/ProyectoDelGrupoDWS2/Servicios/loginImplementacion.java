@@ -21,7 +21,7 @@ public class loginImplementacion {
 
 	/**
 	 * Metodo privado que valida el email correctamente
-	 * 
+	 *
 	 * @author jpribio - 19/11/24
 	 * @param correo electronico introducido por el usuario
 	 * @return devuelve el email validado
@@ -41,14 +41,16 @@ public class loginImplementacion {
 
 		usuario.setContraseniaUsu(util.encriptarContrasenia(usuario.getContraseniaUsu()));
 
+		ModelAndView vista = new ModelAndView();
+
 		ObjectMapper objetoMapeador = new ObjectMapper();
 		String formatoJson = objetoMapeador.writeValueAsString(usuario);
 
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente
-				.target("http://192.168.30.150:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
-						+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu())
+				.target("http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario=" + usuario.getCorreoUsu()
+						+ "&contraseniaUsuario=" + usuario.getContraseniaUsu())
 				.request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
 
 		System.out.println(respuestaApi.getStatus());
@@ -57,12 +59,14 @@ public class loginImplementacion {
 			UsuariosDto respuestaCuerpoApi = respuestaApi.readEntity(UsuariosDto.class);
 
 			if (respuestaCuerpoApi.EsAdmin()) {
-				return new ModelAndView("index");
+
+				vista.setViewName("index");
+
 			} else {
-				return new ModelAndView("index");
+				vista.setViewName("index");
 			}
 		} else {
-			return new ModelAndView("login");
+			vista.setViewName("login");
 		}
 	}
 

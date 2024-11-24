@@ -24,7 +24,7 @@
 					d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
             </svg>
 		</a>
-		<h1>ZONA ADMINISTRATIVA</h1>
+		<h1>ZONA ADMINISTRATIVAa</h1>
 	</nav>
 
 	<main class="container w-100">
@@ -34,13 +34,6 @@
 				<h1 class="tituloUsuarios">USUARIOS</h1>
 
 				<div class="contenedorUsuarios">
-					<!-- Lista de usuarios usando Thymeleaf -->
-					<!-- 					<div th:each="usuario : ${usuarios}" class="contenidoUsuarios"> -->
-					<!-- 						<p th:text="${usuario.alias}" class="alias"></p> -->
-					<!-- 						<p th:text="${usuario.dni}" class="DNI"></p> -->
-					<!-- 						<button class="eliminarUsu">Eliminar</button> -->
-					<!-- 						<button class="modificarUsu">Modificar</button> -->
-					<!-- 					</div> -->
 					<div class="contenidoUsuarios">
 						<p class="alias">ALIAS</p>
 						<button class="eliminarUsu">ELiminar</button>

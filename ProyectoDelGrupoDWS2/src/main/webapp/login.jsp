@@ -11,15 +11,17 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cs.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/cs.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<nav class="navegador2">
 		<!-- Enlace con Thymeleaf -->
-		<a href="${pageContext.request.contextPath}/"> <svg xmlns="http://www.w3.org/2000/svg"
-				width="60" height="60" fill="currentColor"
-				class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+		<a href="${pageContext.request.contextPath}/"> <svg
+				xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+				fill="currentColor" class="bi bi-arrow-left-circle"
+				viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
 					d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
             </svg>
@@ -31,18 +33,21 @@
 			<div class="col zonaLoginForm">
 
 				<!-- Formulario con Thymeleaf -->
-				<form class="w-100 formulario" action="${pageContext.request.contextPath}/login/verificarElUsuario" method="post">
+				<form class="w-100 formulario"
+					action="${pageContext.request.contextPath}/login" method="post">
 					<h1 class="nombreLogin">LOGIN</h1>
 					<div class="contenidoLogin">
 						<div class="divCorreo">
 							<!-- Campo de correo con Thymeleaf -->
 							<input type="email" placeholder="Correo electrónico"
-								class="correo" name="correoUsu" required />
+								class="correo" name="correoUsu" value="${usuarios.correoUsu}"
+								required />
 						</div>
 						<div class="divContra">
 							<!-- Campo de contraseña con Thymeleaf -->
 							<input type="password" placeholder="Contraseña"
-								class="contrasenia" name="contraseniaUsu" required />
+								class="contrasenia" name="contraseniaUsu"
+								value="${usuarios.contraseniaUsu}" required />
 						</div>
 						<div class="form-check divCheckbox">
 							<!-- Checkbox con Thymeleaf -->
@@ -62,12 +67,12 @@
 			<div class="col d-lg-block d-none zonaLoginImagenes">
 				<!-- Imágenes con Thymeleaf -->
 				<div class="image-box1 top">
-					<img src="${pageContext.request.contextPath}/images/motoAzul.jpg" alt="Imagen de moto 1"
-						class="imagen1" />
+					<img src="${pageContext.request.contextPath}/images/motoAzul.jpg"
+						alt="Imagen de moto 1" class="imagen1" />
 				</div>
 				<div class="image-box">
-					<img src="${pageContext.request.contextPath}/images/descarga.jpg" alt="Imagen de moto 2"
-						class="imagen2" />
+					<img src="${pageContext.request.contextPath}/images/descarga.jpg"
+						alt="Imagen de moto 2" class="imagen2" />
 				</div>
 			</div>
 		</div>
