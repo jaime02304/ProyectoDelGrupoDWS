@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.UsuarioService;
 
-
+/*
+ * Clase del programa que controla la parte de los usuarios, los metodos de alta, baja y modificar.
+ * CHI - 22/11/2024
+ * */
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {

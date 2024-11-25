@@ -21,9 +21,10 @@ import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.entidadUsuario;
 @RequestMapping("/api/ProyectoDWS")
 public class WebAuthController {
 
+	@Autowired
     private final UsuarioService usuarioService;
 
-    @Autowired
+    
     public WebAuthController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }

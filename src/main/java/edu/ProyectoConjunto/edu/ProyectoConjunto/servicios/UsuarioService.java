@@ -10,10 +10,11 @@ import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 @Service
 public class UsuarioService {
 
+	@Autowired
     private final usuarioRepositorio usuarioRepositorio;
     //private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Instancia directa
 
-    @Autowired
+    
     public UsuarioService(usuarioRepositorio usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }
