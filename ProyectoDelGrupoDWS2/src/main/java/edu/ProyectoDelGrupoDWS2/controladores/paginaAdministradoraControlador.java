@@ -12,7 +12,7 @@ public class paginaAdministradoraControlador {
 	@GetMapping
 	public ModelAndView paginaAdmin() {
 		ModelAndView vista = new ModelAndView();
-		vista.setViewName("parteAdministradora");
+		vista.setViewName("parteAdministrativa");
 		return vista;
 	}
 
