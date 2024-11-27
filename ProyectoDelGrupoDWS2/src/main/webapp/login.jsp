@@ -33,7 +33,7 @@
 			<div class="col zonaLoginForm">
 
 				<!-- Formulario con Thymeleaf -->
-				<form class="w-100 formulario"
+				<form class="w-100 formulario" id="formulario"
 					action="${pageContext.request.contextPath}/login" method="post">
 					<h1 class="nombreLogin">LOGIN</h1>
 					<div class="contenidoLogin">
@@ -82,16 +82,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
-
-	<script>
-		// Inyectar la variable desde el backend
-		var esAdmin = $
-		{
-			esAdmin
-		};
-	</script>
-	<script src="${pageContext.request.contextPath}/javascript.js">
-		
-	</script>
+	<script src="${pageContext.request.contextPath}/javascript.js"></script>
 </body>
 </html>

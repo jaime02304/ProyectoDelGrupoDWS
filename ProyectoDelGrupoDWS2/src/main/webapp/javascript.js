@@ -1,16 +1,38 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Seleccionar los botones del DOM
-    const botonAdmin = document.querySelector(".botonAdmin");
-    const linkLogin = document.querySelector(".linkLogin");
-
-	console.log(esAdmin);
-    if (esAdmin) {
-        // Si es administrador, mostrar el botón de admin y ocultar el login
-		botonAdmin.classList.remove("hidden");
-		        linkLogin.classList.add("hidden"); 
-    } else {
-        // Si no es administrador, ocultar ambos botones
-        botonAdmin.style.display = "none"; // Ocultar botón admin
-        linkLogin.style.display = "none";  // Ocultar link de login
-    }
-});
+//document.addEventListener("DOMContentLoaded", function() {
+//	setTimeout(function() {
+//		// Seleccionar el formulario
+//		const formulario = document.getElementById('formulario');
+//		if (formulario) {
+//			formulario.addEventListener("submit", function(event) {
+//				// Prevenir el envío para pruebas (puedes quitarlo si no lo necesitas)
+//				event.preventDefault();
+//
+//				// Obtener el valor de esAdmin desde el backend
+//				const esAdmin = $
+//				{
+//					esAdmin
+//
+//				};
+//
+//				// Seleccionar el div donde se agregará el botón
+//				var div = document.getElementById("contenedorAdmin");
+//				console.log(div);
+//				console.log(esAdmin);
+//
+//				// Verifica si el div existe
+//				if (div) {
+//					// Verifica si es administrador
+//					if (esAdmin) {
+//						// Crear un nuevo botón de administración
+//						var boton = document.createElement('button');
+//						boton.classList.add('botonAdmin');
+//						boton.innerText = 'ADMINISTRADORES';
+//						div.append(boton);  // Solo agrega el botón si div existe
+//					}
+//				} else {
+//					console.error("El div con clase 'linkAdmin' no fue encontrado.");
+//				}
+//			});
+//		}
+//	}, 100);  // Retrasar ligeramente la ejecución
+//});

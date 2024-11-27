@@ -14,9 +14,7 @@
 	<nav class="navegador">
 		<!-- Enlace dinámico a la página de administrador -->
 		<a href="${pageContext.request.contextPath}/paginaAdministradora"
-			class="linkAdmin" >
-			<button class="botonAdmin" style= display:none;>ADMINISTRADOR</button>
-		</a>
+			class="linkAdmin"><div id="contenedorAdmin"></div> </a>
 
 		<!-- Enlace dinámico al login -->
 
@@ -27,5 +25,7 @@
 					d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.69-6 6v2h12v-2c0-3.31-2.69-6-6-6z" />
     </svg> </a>
 	</nav>
+
+	<script src="${pageContext.request.contextPath}/javascript.js"></script>
 </body>
 </html>

@@ -51,7 +51,7 @@ public class loginImplementacion {
 
 		// Configuración de la solicitud API
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
-		String url = "http://192.168.30.150:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
+		String url = "http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
 				+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente.target(url)
