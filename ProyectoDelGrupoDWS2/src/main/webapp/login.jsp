@@ -83,7 +83,15 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 
-	<!-- Ruta de archivo JavaScript con Thymeleaf -->
-	<script src="${pageContext.request.contextPath}/js/javascript.js"></script>
+	<script>
+		// Inyectar la variable desde el backend
+		var esAdmin = $
+		{
+			esAdmin
+		};
+	</script>
+	<script src="${pageContext.request.contextPath}/javascript.js">
+		
+	</script>
 </body>
 </html>

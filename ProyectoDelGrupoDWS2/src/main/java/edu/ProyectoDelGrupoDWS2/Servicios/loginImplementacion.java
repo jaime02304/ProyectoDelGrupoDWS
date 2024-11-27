@@ -51,8 +51,8 @@ public class loginImplementacion {
 
 		// Configuración de la solicitud API
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
-		String url = "http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario=" + usuario.getCorreoUsu()
-				+ "&contraseniaUsuario=" + usuario.getContraseniaUsu();
+		String url = "http://192.168.30.150:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
+				+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente.target(url)
 				.request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
@@ -68,16 +68,20 @@ public class loginImplementacion {
 				// Validar si es admin
 				if (respuestaCuerpoApi.EsAdmin()) {
 					vista.setViewName("index");
+					vista.addObject("esAdmin", true);
 				} else {
 					vista.setViewName("index");
+					vista.addObject("esAdmin", true);
 				}
 			} catch (Exception e) {
 				System.err.println("Error al procesar la respuesta de la API: " + e.getMessage());
 				vista.setViewName("login");
+				vista.addObject("esAdmin", false);
 			}
 		} else {
 			System.err.println("Error en la solicitud: Código " + respuestaApi.getStatus());
 			vista.setViewName("login");
+			vista.addObject("esAdmin", false);
 		}
 
 		// Retorno garantizado en todas las rutas de ejecución

@@ -14,13 +14,13 @@
 	<nav class="navegador">
 		<!-- Enlace dinámico a la página de administrador -->
 		<a href="${pageContext.request.contextPath}/paginaAdministradora"
-			class="linkAdmin">
-			<button class="botonAdmin">ADMINISTRADOR</button>
+			class="linkAdmin" >
+			<button class="botonAdmin" style= display:none;>ADMINISTRADOR</button>
 		</a>
 
 		<!-- Enlace dinámico al login -->
 
-		<a href="${pageContext.request.contextPath}/login"><svg
+		<a href="${pageContext.request.contextPath}/login" class="linkLogin"><svg
 				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 				class="registroUsuario" width="60" height="60">
         <path

@@ -31,6 +31,7 @@ public class loginControlador {
 			return metodosLogin.enviarDatosLogin(usuarios);
 		} catch (Exception e) {
 			vista.addObject("error", "Error al iniciar sesión.");
+			vista.addObject("esAdmin", false);
 			return vista;
 		}
 	}
