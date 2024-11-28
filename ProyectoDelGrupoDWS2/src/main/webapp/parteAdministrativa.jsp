@@ -37,9 +37,9 @@
 				<h1 class="tituloUsuarios">USUARIOS</h1>
 				<div class="contenedorUsuarios">
 					<c:if test="${not empty listadoUsuarios}">
-						<c:forEach var="usuariosListado" items="${listadoUsuarios}">
+						<c:forEach var="alias" items="${listadoUsuarios}">
 							<div class="contenidoUsuarios">
-								<p class="alias">${usuariosListado.alias}</p>
+								<p class="alias">${alias}</p>
 								<button class="eliminarUsu">Eliminar</button>
 								<button class="modificarUsu">Modificar</button>
 							</div>

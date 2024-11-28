@@ -43,10 +43,10 @@ public class paginaAdministradoraControlador {
 	public ModelAndView recogerLosUsuarios() {
 		ModelAndView vista = new ModelAndView();
 		try {
-			return implementacionLogin.recogifaDeUsuarios();
+			return implementacionLogin.recogidaDeDatos();
 
 		} catch (Exception e) {
-			vista.addObject("error", "No se ha encontrado ningun usuario, por la api");
+			vista.addObject("error", "No se ha encontrado ningun usuario, por un error en la web");
 			vista.setViewName("parteAdministrativa");
 			return vista;
 		}

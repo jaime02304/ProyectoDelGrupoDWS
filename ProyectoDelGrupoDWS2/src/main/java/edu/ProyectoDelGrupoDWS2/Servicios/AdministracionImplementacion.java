@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,53 +21,89 @@ import jakarta.ws.rs.core.Response;
  */
 @Service
 public class AdministracionImplementacion {
-	// Respuesta de la API
-	// public List<UsuariosCompletosDto> respuestaCuerpoApi = new
-	// ArrayList<UsuariosCompletosDto>();
 
 	/**
 	 * Método público para recoger la información de los usuarios necesarios
 	 * 
 	 * @author jpribio - 28/11/24
 	 */
-	public ModelAndView recogifaDeUsuarios() throws Exception {
+	public ModelAndView recogidaDeDatos() throws Exception {
 		ModelAndView vista = new ModelAndView();
 
 		// Crear un cliente REST para acceder a la API
 		Client cliente = ClientBuilder.newClient();
-		String url = "http://192.168.30.150:8081/api/usuarios/obtenerTodosUsuarios";
+		String url = "http://localhost:8081/api/usuarios/obtenerTodosUsuarios";
 
 		// Llamar a la API
 		Response respuestaApi = cliente.target(url).request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
 
 		if (respuestaApi.getStatus() == 200) {
-		UsuariosCompletosDto usus = listadoUsuarios(respuestaApi);
-		List<UsuariosCompletosDto> usuListadoCompletosDtos = new ArrayList<UsuariosCompletosDto>();
-		usuListadoCompletosDtos.add(usus);
-		// Agregar la lista de usuarios al modelo
-			vista.addObject("listadoUsuarios", usuListadoCompletosDtos);
+			
+			//Esta es la parte de los ususarios
+			List<UsuariosCompletosDto> usuListadoCompletosDtos = listadoUsuarios(respuestaApi);
+			  // Crear una lista solo con los alias
+	        List<String> aliasLista = new ArrayList<>();
+	        for (UsuariosCompletosDto usuario : usuListadoCompletosDtos) {
+	            aliasLista.add(usuario.getAlias()); // Extraer solo el alias de cada usuario
+	        }
+	        
+	        //Aquideberia de estar la parte de los clubes
 
 			// Configurar la vista
 			vista.setViewName("parteAdministrativa");
+			// Agregar la lista de usuarios al modelo
+			vista.addObject("listadoUsuarios", aliasLista);
 		} else {
 			// En caso de error, agregar mensaje de error
-			vista.addObject("error", "No se ha encontrado ningun usuario");
+			vista.addObject("error", "No se ha encontrado ningun usuario, por un error de la web (Api)");
 			vista.setViewName("parteAdministrativa");
 		}
 		return vista;
 	}
+	
+	/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+	//METODOS PRIVADOS
 
-	private UsuariosCompletosDto listadoUsuarios(Response respuestaApi) throws Exception {
-		JSONObject jsonRespuesta = new JSONObject(respuestaApi);
-		String base64String = jsonRespuesta.getString("imagenUsu"); // Recuperar como String
-		byte[] byteArray = base64String.getBytes();
-		UsuariosCompletosDto usuarioCompletado = new UsuariosCompletosDto(
-				jsonRespuesta.getString("nombreUsu"),
-				jsonRespuesta.getString("apellidoUsu"),
-				jsonRespuesta.getBoolean("esAdmin"), 
-				byteArray,
-				jsonRespuesta.getString("direccionUsu"),
-				jsonRespuesta.getString("alias"));
-		return usuarioCompletado;
+	/**
+	 * MEtodo privado que coge el texto plano en formato JSON y lo convierte a un Dto y lo mete en una lista
+	 * @author jpribio - 28/11/24
+	 * @param LE paso la rerspuesta de la api que contiene todos los usuarios en texto plano
+	 * @return devuelvo la lista de esos datos pero con un formato DTO
+	 * @throws Exception
+	 */
+	private List<UsuariosCompletosDto> listadoUsuarios(Response respuestaApi) throws Exception {
+		//Leer el JSON recibido
+		  String jsonString = respuestaApi.readEntity(String.class);
+
+          // Parsear el JSON recibido
+          JSONArray usuariosArray = new JSONArray(jsonString); // El JSON raíz es un array
+
+          // Crear lista de Usuarios
+          List<UsuariosCompletosDto> usuarios = new ArrayList<>();
+
+          //recorrer el ArraJSON para ir extrayendo los campos y añadirlo al usuarioCompletoDto
+          for (int i = 0; i < usuariosArray.length(); i++) {
+              JSONObject jsonUsuario = usuariosArray.getJSONObject(i);
+
+              // Extraer datos del JSON
+              String nombre = jsonUsuario.getString("nombreUsu");
+              String apellido = jsonUsuario.getString("apellidoUsu");
+              boolean esAdmin = jsonUsuario.getBoolean("esAdmin");
+
+              // Manejo del campo imagenUsu (null o vacío)
+              String imagenBase64 = jsonUsuario.optString("imagenUsu", null);
+              byte[] imagen = null;
+              if (imagenBase64 != null && !imagenBase64.isEmpty()) {
+                  imagen = Base64.getDecoder().decode(imagenBase64);
+              }
+
+              String direccion = jsonUsuario.getString("direccionUsu");
+              String alias = jsonUsuario.getString("alias");
+
+              // Crear objeto Usuario y añadirlo a la lista
+              UsuariosCompletosDto usuario = new UsuariosCompletosDto(nombre, apellido, esAdmin, imagen, direccion, alias);
+              usuarios.add(usuario);
+          }
+          return usuarios;
 	}
 }
