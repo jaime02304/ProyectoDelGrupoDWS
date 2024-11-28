@@ -10,7 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Servicios.loginImplementacion;
+import jakarta.servlet.http.HttpSession;
 
+/**
+ * Clase controladora de la parte login
+ *  @author jpribio - 28/11/24
+ */
 @Controller
 @RequestMapping("/login")
 public class loginControlador {
@@ -18,17 +23,28 @@ public class loginControlador {
 	@Autowired
 	private loginImplementacion metodosLogin;
 
+	/**
+	 * metodo que devuelve la vista de la pagina login
+	 * @author jpribio - 28/11/24
+	 * @return
+	 */
 	@GetMapping
 	public ModelAndView login() {
 		ModelAndView vista = new ModelAndView("login");
 		return vista;
 	}
 
+	/**
+	 * Metodo post que envia los atributos del login al mtodo de enviar datos en la implementacion del login
+	 *  @author jpribio - 28/11/24
+	 * @param usuarios (Atributos del usuario del login)
+	 * @return ModelAndView
+	 */
 	@PostMapping
-	public ModelAndView metodoDeLoguearse(@ModelAttribute UsuariosDto usuarios) {
+	public ModelAndView metodoDeLoguearse(@ModelAttribute UsuariosDto usuarios, HttpSession sesionIniciada) {
 		ModelAndView vista = new ModelAndView("login");
 		try {
-			return metodosLogin.enviarDatosLogin(usuarios);
+			return metodosLogin.enviarDatosLogin(usuarios,sesionIniciada);
 		} catch (Exception e) {
 			vista.addObject("error", "Error al iniciar sesión.");
 			vista.addObject("esAdmin", false);

@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Util.utilidades;
+import edu.ProyectoDelGrupoDWS2.controladores.indexControlador;
+import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.client.ClientBuilder;
 
 /**
@@ -36,7 +38,13 @@ public class loginImplementacion {
 		return email1.matcher(email).matches();
 	}
 
-	public ModelAndView enviarDatosLogin(UsuariosDto usuario) throws Exception {
+	/**
+	 * Metodod que envia los datos del login hacia la api y recibe una respuesta
+	 * @param usuario (los datos del login)
+	 * @return devuelve un modelAndView para cambiar de pagina y coger los objetos imprescindible
+	 * @throws Exception
+	 */
+	public ModelAndView enviarDatosLogin(UsuariosDto usuario, HttpSession SesionIniciada) throws Exception {
 		ModelAndView vista = new ModelAndView();
 
 		// Validación del correo electrónico
@@ -51,7 +59,7 @@ public class loginImplementacion {
 
 		// Configuración de la solicitud API
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
-		String url = "http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
+		String url = "http://192.168.30.150:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
 				+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente.target(url)
@@ -64,19 +72,18 @@ public class loginImplementacion {
 			// Mapear la respuesta al objeto UsuariosDto
 			try {
 				UsuariosDto respuestaCuerpoApi = respuestaApi.readEntity(UsuariosDto.class);
-
 				// Validar si es admin
 				if (respuestaCuerpoApi.EsAdmin()) {
 					vista.setViewName("index");
-					vista.addObject("esAdmin", true);
+					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
 				} else {
 					vista.setViewName("index");
-					vista.addObject("esAdmin", true);
+					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
 				}
 			} catch (Exception e) {
 				System.err.println("Error al procesar la respuesta de la API: " + e.getMessage());
 				vista.setViewName("login");
-				vista.addObject("esAdmin", false);
+				vista.addObject("usuario", false);
 			}
 		} else {
 			System.err.println("Error en la solicitud: Código " + respuestaApi.getStatus());

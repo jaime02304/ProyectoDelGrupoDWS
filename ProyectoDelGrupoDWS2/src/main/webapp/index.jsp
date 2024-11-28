@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,8 +14,11 @@
 <body>
 	<nav class="navegador">
 		<!-- Enlace dinámico a la página de administrador -->
-		<a href="${pageContext.request.contextPath}/paginaAdministradora"
-			class="linkAdmin"><div id="contenedorAdmin"></div> </a>
+		<form action="${pageContext.request.contextPath}/paginaAdministradora/recogerUsuarios" method="get"
+			class="linkAdmin"> <c:if test="${esAdmin}">
+				<button type="submit" class="botonAdmin">ADMINISTRADORES</button>
+			</c:if>
+		</form>
 
 		<!-- Enlace dinámico al login -->
 
@@ -26,6 +30,5 @@
     </svg> </a>
 	</nav>
 
-	<script src="${pageContext.request.contextPath}/javascript.js"></script>
 </body>
 </html>
