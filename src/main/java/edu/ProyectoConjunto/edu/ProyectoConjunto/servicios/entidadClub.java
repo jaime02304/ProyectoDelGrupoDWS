@@ -1,13 +1,9 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.servicios;
 
-import java.util.List;
-
-import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
