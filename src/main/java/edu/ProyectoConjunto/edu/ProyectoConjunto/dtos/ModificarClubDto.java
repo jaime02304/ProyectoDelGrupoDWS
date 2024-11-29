@@ -2,7 +2,6 @@ package edu.ProyectoConjunto.edu.ProyectoConjunto.dtos;
 
 public class ModificarClubDto {
     private String nombreClub;
-    private String correoClub;
     private String sedePrincipalClub;
     private String localidadClub;
     private byte[] imagenClub;
@@ -14,14 +13,6 @@ public class ModificarClubDto {
 
     public void setNombreClub(String nombreClub) {
         this.nombreClub = nombreClub;
-    }
-
-    public String getCorreoClub() {
-        return correoClub;
-    }
-
-    public void setCorreoClub(String correoClub) {
-        this.correoClub = correoClub;
     }
 
     public String getSedePrincipalClub() {

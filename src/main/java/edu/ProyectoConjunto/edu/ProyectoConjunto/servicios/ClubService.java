@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.ModificarClubDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.clubDto;
@@ -15,7 +16,9 @@ public class ClubService {
 	@Autowired
     private clubRepositorio clubRepositorio; // Asegúrate de inyectarlo correctamente
 	
-    private List<entidadClub> listaClubs = new ArrayList<>();
+	public ClubService(clubRepositorio clubRepositorio) {
+        this.clubRepositorio = clubRepositorio;
+	}
 
     public void crearClub(clubDto clubDTO) {
         entidadClub club = new entidadClub();
@@ -26,7 +29,7 @@ public class ClubService {
         club.setSedePrincipalClub(clubDTO.getSedePrincipalClub());
         club.setLocalidadClub(clubDTO.getLocalidadClub());
         club.setImagenClub(clubDTO.getImagenClub());
-        listaClubs.add(club);
+        
         
         entidadClub clubGuardado = clubRepositorio.save(club);
         clubDTO.setIdClub(clubGuardado.getIdClub());
@@ -50,7 +53,7 @@ public class ClubService {
     public List<clubDto> obtenerTodosClubs() {
     	List<entidadClub> clubs = clubRepositorio.findAll();
         List<clubDto> resultado = new ArrayList<>();
-        for (entidadClub club : listaClubs) {
+        for (entidadClub club : clubs) {
             clubDto dto = new clubDto();
             dto.setIdClub(club.getIdClub());
             dto.setNombreClub(club.getNombreClub());
@@ -63,33 +66,36 @@ public class ClubService {
         return resultado;
     }
 
-    public boolean modificarClub(String nombreClub, ModificarClubDto modificarClubDto) {
+    @Transactional
+    public boolean modificarClub(String nombreClub, ModificarClubDto clubDto) {
         // Buscar el club por nombre
         entidadClub clubExistente = clubRepositorio.findByNombreClub(nombreClub);
 
         if (clubExistente == null) {
             return false; // Club no encontrado
         }
+        
+        System.out.println("Antes de la modificación: " + clubExistente);
 
         // Modificar solo los campos que tienen valor en el DTO
-        if (modificarClubDto.getNombreClub() != null) {
-            clubExistente.setNombreClub(modificarClubDto.getNombreClub());
+        if (clubDto.getNombreClub() != null) {
+            clubExistente.setNombreClub(clubDto.getNombreClub());
         }
-        if (modificarClubDto.getCorreoClub() != null) {
-            clubExistente.setCorreoClub(modificarClubDto.getCorreoClub());
+        
+        if (clubDto.getSedePrincipalClub() != null) {
+            clubExistente.setSedePrincipalClub(clubDto.getSedePrincipalClub());
         }
-        if (modificarClubDto.getSedePrincipalClub() != null) {
-            clubExistente.setSedePrincipalClub(modificarClubDto.getSedePrincipalClub());
+        if (clubDto.getLocalidadClub() != null) {
+            clubExistente.setLocalidadClub(clubDto.getLocalidadClub());
         }
-        if (modificarClubDto.getLocalidadClub() != null) {
-            clubExistente.setLocalidadClub(modificarClubDto.getLocalidadClub());
-        }
-        if (modificarClubDto.getImagenClub() != null) {
-            clubExistente.setImagenClub(modificarClubDto.getImagenClub());
+        if (clubDto.getImagenClub() != null) {
+            clubExistente.setImagenClub(clubDto.getImagenClub());
         }
 
         // Guardar los cambios en la base de datos
         clubRepositorio.save(clubExistente);
+        
+        System.out.println("Después de la modificación: " + clubExistente);
 
         return true; // Club actualizado con éxito
     }

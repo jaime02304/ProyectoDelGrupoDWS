@@ -2,11 +2,11 @@ package edu.ProyectoConjunto.edu.ProyectoConjunto.dtos;
 
 public class clubDto {
 	long idClub;
-	String nombreClub = "aaaaa";
-	String correoClub = "aaaaa";
-	String contraseniaClub = "aaaaa";
-	String sedePrincipalClub = "aaaaa";
-	String localidadClub = "aaaaa";
+	String nombreClub;
+	String correoClub;
+	String contraseniaClub;
+	String sedePrincipalClub;
+	String localidadClub;
 	private byte[] imagenClub; // Array de bytes para la imagen
 
     // Constructor

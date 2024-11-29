@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.ModificarClubDto;
-import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.ModificarClubDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.clubDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.ClubService;
 
@@ -80,8 +79,8 @@ public class ClubController {
 
     @PutMapping("/modificar/{nombreClub}")
     public ResponseEntity<String> modificarClub(@PathVariable String nombreClub, 
-                                                @RequestBody ModificarClubDto modificarClubDto) {
-        boolean clubModificado = clubService.modificarClub(nombreClub, modificarClubDto);
+                                                @RequestBody ModificarClubDto clubDto) {
+        boolean clubModificado = clubService.modificarClub(nombreClub, clubDto);
 
         if (clubModificado) {
             return ResponseEntity.ok("Club actualizado con éxito");
