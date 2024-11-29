@@ -3,6 +3,7 @@ package edu.ProyectoDelGrupoDWS2.Servicios;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
@@ -44,7 +45,7 @@ public class loginImplementacion {
 	 * @return devuelve un modelAndView para cambiar de pagina y coger los objetos imprescindible
 	 * @throws Exception
 	 */
-	public ModelAndView enviarDatosLogin(UsuariosDto usuario, HttpSession SesionIniciada) throws Exception {
+	public ModelAndView enviarDatosLogin(UsuariosDto usuario, HttpSession SesionIniciada,Model modelo) throws Exception {
 		ModelAndView vista = new ModelAndView();
 
 		// Validación del correo electrónico
@@ -76,19 +77,21 @@ public class loginImplementacion {
 				if (respuestaCuerpoApi.EsAdmin()) {
 					vista.setViewName("index");
 					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
-				} else {
-					vista.setViewName("index");
-					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
-				}
+					vista.addObject("succes",true);
+					SesionIniciada.setAttribute("correo", respuestaCuerpoApi.getCorreoUsu());
+				} 
 			} catch (Exception e) {
 				System.err.println("Error al procesar la respuesta de la API: " + e.getMessage());
 				vista.setViewName("login");
 				vista.addObject("usuario", false);
+				vista.addObject("succes",false);
+				modelo.addAttribute("error", "Usuario o contraseña incorrectos");
 			}
 		} else {
 			System.err.println("Error en la solicitud: Código " + respuestaApi.getStatus());
 			vista.setViewName("login");
 			vista.addObject("esAdmin", false);
+			vista.addObject("succes",false);
 		}
 
 		// Retorno garantizado en todas las rutas de ejecución

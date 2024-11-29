@@ -20,9 +20,14 @@ public class indexControlador {
 	 * @author jpribio - 28/11/24
 	 * @return
 	 */
-	@GetMapping
-	public ModelAndView index(HttpSession SesionIniciada) {
-		return new ModelAndView("index");
-	}
+//	@GetMapping
+//	public ModelAndView index(HttpSession sesionIniciada) {
+//		ModelAndView  vista = new ModelAndView();
+//   String loginCorreo = (String) sesionIniciada.getAttribute("correo");
+//		vista.addObject("succes", true);
+//		vista.setViewName("index");
+//		System.out.println(vista);
+//		return vista;
+//	}
 
 }
