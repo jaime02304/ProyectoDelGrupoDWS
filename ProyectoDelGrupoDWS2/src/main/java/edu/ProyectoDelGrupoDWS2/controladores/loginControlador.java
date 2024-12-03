@@ -48,8 +48,8 @@ public class loginControlador {
 			return metodosLogin.enviarDatosLogin(usuarios,sesionIniciada,modelo);
 		} catch (Exception e) {
 			vista.addObject("error", "Error al iniciar sesión.");
-			vista.addObject("esAdmin", false);
-			vista.addObject("succes",false);
+			vista.addObject("esAdmin", true);
+			vista.addObject("succes",true);
 			return vista;
 		}
 	}

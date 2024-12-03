@@ -77,21 +77,21 @@ public class loginImplementacion {
 				if (respuestaCuerpoApi.EsAdmin()) {
 					vista.setViewName("index");
 					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
-					vista.addObject("succes",true);
+					vista.addObject("succes",false);
 					SesionIniciada.setAttribute("correo", respuestaCuerpoApi.getCorreoUsu());
 				} 
 			} catch (Exception e) {
 				System.err.println("Error al procesar la respuesta de la API: " + e.getMessage());
 				vista.setViewName("login");
-				vista.addObject("usuario", false);
-				vista.addObject("succes",false);
+				vista.addObject("usuario", true);
+				vista.addObject("succes",true);
 				modelo.addAttribute("error", "Usuario o contraseña incorrectos");
 			}
 		} else {
 			System.err.println("Error en la solicitud: Código " + respuestaApi.getStatus());
 			vista.setViewName("login");
-			vista.addObject("esAdmin", false);
-			vista.addObject("succes",false);
+			vista.addObject("esAdmin", true);
+			vista.addObject("succes",true);
 		}
 
 		// Retorno garantizado en todas las rutas de ejecución
