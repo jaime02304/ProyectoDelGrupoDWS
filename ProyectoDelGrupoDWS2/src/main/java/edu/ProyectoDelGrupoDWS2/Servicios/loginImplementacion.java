@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Util.utilidades;
-import edu.ProyectoDelGrupoDWS2.controladores.indexControlador;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.client.ClientBuilder;
 
@@ -41,11 +40,14 @@ public class loginImplementacion {
 
 	/**
 	 * Metodod que envia los datos del login hacia la api y recibe una respuesta
+	 * 
 	 * @param usuario (los datos del login)
-	 * @return devuelve un modelAndView para cambiar de pagina y coger los objetos imprescindible
+	 * @return devuelve un modelAndView para cambiar de pagina y coger los objetos
+	 *         imprescindible
 	 * @throws Exception
 	 */
-	public ModelAndView enviarDatosLogin(UsuariosDto usuario, HttpSession SesionIniciada,Model modelo) throws Exception {
+	public ModelAndView enviarDatosLogin(UsuariosDto usuario, Model modelo, HttpSession sessionIniciada)
+			throws Exception {
 		ModelAndView vista = new ModelAndView();
 
 		// Validación del correo electrónico
@@ -60,8 +62,8 @@ public class loginImplementacion {
 
 		// Configuración de la solicitud API
 		jakarta.ws.rs.client.Client cliente = ClientBuilder.newClient();
-		String url = "http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario="
-				+ usuario.getCorreoUsu() + "&contraseniaUsuario=" + usuario.getContraseniaUsu();
+		String url = "http://localhost:8081/api/ProyectoDWS/verificarUsuario?correoUsuario=" + usuario.getCorreoUsu()
+				+ "&contraseniaUsuario=" + usuario.getContraseniaUsu();
 
 		jakarta.ws.rs.core.Response respuestaApi = cliente.target(url)
 				.request(jakarta.ws.rs.core.MediaType.APPLICATION_JSON).get();
@@ -73,26 +75,28 @@ public class loginImplementacion {
 			// Mapear la respuesta al objeto UsuariosDto
 			try {
 				UsuariosDto respuestaCuerpoApi = respuestaApi.readEntity(UsuariosDto.class);
+
 				// Validar si es admin
-				if (respuestaCuerpoApi.EsAdmin()) {
-					vista.setViewName("index");
-					vista.addObject("esAdmin", respuestaCuerpoApi.EsAdmin());
-					vista.addObject("succes",false);
-					SesionIniciada.setAttribute("correo", respuestaCuerpoApi.getCorreoUsu());
-				} 
+				boolean esAdmin = respuestaCuerpoApi.EsAdmin();
+				sessionIniciada.setAttribute("esAdmin", esAdmin);
+				sessionIniciada.setAttribute("afirmacion", true);
+				vista.setViewName("index");
+
+
 			} catch (Exception e) {
 				System.err.println("Error al procesar la respuesta de la API: " + e.getMessage());
+				sessionIniciada.setAttribute("esAdmin", false);
+				sessionIniciada.setAttribute("afirmacion", false);
 				vista.setViewName("login");
-				vista.addObject("usuario", true);
-				vista.addObject("succes",true);
+
 				modelo.addAttribute("error", "Usuario o contraseña incorrectos");
 			}
 		} else {
 			System.err.println("Error en la solicitud: Código " + respuestaApi.getStatus());
+			sessionIniciada.setAttribute("esAdmin", false);
+			sessionIniciada.setAttribute("afirmacion", false);
 			vista.setViewName("login");
-			vista.addObject("esAdmin", true);
-			vista.addObject("succes",true);
-		}
+			}
 
 		// Retorno garantizado en todas las rutas de ejecución
 		return vista;

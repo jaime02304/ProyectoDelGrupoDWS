@@ -1,7 +1,11 @@
 package edu.ProyectoDelGrupoDWS2.controladores;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Clase principal (controlador) donde se encuentra los metodos de la pagina
@@ -12,4 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class indexControlador {
+
+	@GetMapping
+	public ModelAndView index(HttpSession sessionIniciada) {
+		Boolean isAdmin = (Boolean) sessionIniciada.getAttribute("isAdmin");
+		Boolean afirmacion = (Boolean) sessionIniciada.getAttribute("afirmacion");
+		ModelAndView vista = new ModelAndView();
+		vista.addObject("esAdmin", isAdmin);
+		vista.addObject("afirmacion", afirmacion);
+		vista.setViewName("index");
+		return vista;
+	}
+
+	@GetMapping("/cerrarSesion")
+	public ModelAndView cerrarSession(HttpSession sesionCerrada) {
+		sesionCerrada.invalidate();
+		ModelAndView vista = new ModelAndView();
+		vista.setViewName("index");
+		return vista;
+	}
+
 }

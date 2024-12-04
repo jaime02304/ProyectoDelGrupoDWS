@@ -24,14 +24,22 @@
 
 		<!-- Enlace dinámico al login -->
 
-		<a href="${pageContext.request.contextPath}/login" class="linkLogin"><c:if
-				test="${!succes}">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+		<div>
+			<a href="${pageContext.request.contextPath}/login" class="linkLogin"
+				style="${afirmacion ? 'display:none;' : ''}"> <svg
+					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
 					class="registroUsuario" width="60" height="60">
         <path
 						d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-6 2.69-6 6v2h12v-2c0-3.31-2.69-6-6-6z" />
     </svg>
-			</c:if> </a>
+			</a>
+			<form
+				action="${pageContext.request.contextPath}/cerrarSesion"
+				method="get" class="linkAdmin" style="${afirmacion ? '': 'display:none;' }">
+					<button type="submit" class="botonAdmin">Cerrar Sesion</button>
+			</form>
+
+		</div>
 	</nav>
 
 </body>

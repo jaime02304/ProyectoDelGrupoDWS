@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.ProyectoDelGrupoDWS2.Dtos.UsuariosDto;
 import edu.ProyectoDelGrupoDWS2.Servicios.AdministracionImplementacion;
 import jakarta.servlet.http.HttpSession;
 
@@ -32,9 +31,12 @@ public class paginaAdministradoraControlador {
 	 * @return
 	 */
 	@GetMapping
-	public ModelAndView paginaAdmin() {
-
+	public ModelAndView paginaAdmin(HttpSession sessionIniciada) {
+		Boolean isAdmin = (Boolean) sessionIniciada.getAttribute("isAdmin");
+		Boolean afirmacion = (Boolean) sessionIniciada.getAttribute("afirmacion");
 		ModelAndView vista = new ModelAndView();
+		vista.addObject("esAdmin", isAdmin);
+		vista.addObject("afirmacion", afirmacion);
 		vista.setViewName("parteAdministrativa");
 		return vista;
 	}

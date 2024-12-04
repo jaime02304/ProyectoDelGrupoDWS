@@ -15,7 +15,8 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * Clase controladora de la parte login
- *  @author jpribio - 28/11/24
+ * 
+ * @author jpribio - 28/11/24
  */
 @Controller
 @RequestMapping("/login")
@@ -26,6 +27,7 @@ public class loginControlador {
 
 	/**
 	 * metodo que devuelve la vista de la pagina login
+	 * 
 	 * @author jpribio - 28/11/24
 	 * @return
 	 */
@@ -36,20 +38,28 @@ public class loginControlador {
 	}
 
 	/**
-	 * Metodo post que envia los atributos del login al mtodo de enviar datos en la implementacion del login
-	 *  @author jpribio - 28/11/24
+	 * Metodo post que envia los atributos del login al mtodo de enviar datos en la
+	 * implementacion del login
+	 * 
+	 * @author jpribio - 28/11/24
 	 * @param usuarios (Atributos del usuario del login)
 	 * @return ModelAndView
 	 */
 	@PostMapping
-	public ModelAndView metodoDeLoguearse(@ModelAttribute UsuariosDto usuarios, HttpSession sesionIniciada,Model modelo) {
-		ModelAndView vista = new ModelAndView("login");
+	public ModelAndView metodoDeLoguearse(@ModelAttribute UsuariosDto usuarios, Model modelo,
+			HttpSession sessionIniciada) {
 		try {
-			return metodosLogin.enviarDatosLogin(usuarios,sesionIniciada,modelo);
+			Boolean isAdmin = (Boolean) sessionIniciada.getAttribute("isAdmin");
+			Boolean afirmacion = (Boolean) sessionIniciada.getAttribute("afirmacion");
+			ModelAndView vista = metodosLogin.enviarDatosLogin(usuarios, modelo, sessionIniciada);
+			vista.addObject("esAdmin", isAdmin);
+			vista.addObject("afirmacion", afirmacion);
+			return vista;
 		} catch (Exception e) {
+			ModelAndView vista = new ModelAndView("login");
 			vista.addObject("error", "Error al iniciar sesión.");
-			vista.addObject("esAdmin", true);
-			vista.addObject("succes",true);
+			vista.addObject("esAdmin", false);
+			vista.addObject("afirmacion", false);
 			return vista;
 		}
 	}
