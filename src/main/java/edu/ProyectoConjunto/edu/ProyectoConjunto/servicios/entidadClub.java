@@ -2,18 +2,22 @@ package edu.ProyectoConjunto.edu.ProyectoConjunto.servicios;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 /**
- * Entidad que representa la tabla Club. 	
+ * Entidad que representa la tabla Club.
+ * CHI - 04/12/2024
  */
 @Entity
 @Table(name = "CLUB")
 public class entidadClub {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClub;
 
     @Column(name = "nombreClub")

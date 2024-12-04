@@ -30,10 +30,18 @@ import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.usuarioRepositorio;
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
-
+	
+	/*
+	 * Llamada al metodo service donde se encuentra toda la logica de la alta, baja, modificacion y muestra de usuarios.
+	 * CHI - 02/12/2024
+	 */
     @Autowired
     private UsuarioService usuarioService;
-
+    
+    /*
+	 * Método que con el postmapping, la url y la llamada al usuarioService crea un usuario.
+	 * CHI - 02/12/2024
+	 */
     @PostMapping("/alta")
     public ResponseEntity<String> altaUsuario(@RequestBody usuarioDto usuarioDTO) {
         // Llamar al servicio para crear el nuevo usuario
@@ -41,6 +49,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuario creado con éxito");
     }
     
+    /*
+	 * Método que con el postmapping, la url y la llamada al usuarioService da de baja un usuario.
+	 * CHI - 02/12/2024
+	 */
     @PostMapping("/baja")
     public ResponseEntity<String> bajaUsuario(@RequestBody String alias) {
         try {
@@ -51,7 +63,10 @@ public class UsuarioController {
         }
     }
     
-    
+    /*
+	 * Método que con el getmapping, la url y la llamada al usuarioService muestra todos los usuarios y los envia al frontend.
+	 * CHI - 02/12/2024
+	 */
     @GetMapping("/obtenerTodosUsuarios")
     public ResponseEntity<List<Map<String, Object>>> obtenerTodosUsuarios() {
         // Obtener todos los usuarios del servicio
@@ -82,6 +97,10 @@ public class UsuarioController {
         }
     }
     
+    /*
+   	 * Método que con el putmapping, la url y la llamada al usuarioService edita un usuario.
+   	 * CHI - 02/12/2024
+   	 */
     @PutMapping("/modificar/{alias}")
     public ResponseEntity<String> modificarUsuario(@PathVariable String alias, 
                                                     @RequestBody ModificarUsuarioDto usuarioDto) {

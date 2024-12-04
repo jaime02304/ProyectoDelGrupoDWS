@@ -19,21 +19,36 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.ModificarClubDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.clubDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.servicios.ClubService;
-
+/*
+ * Clase que controla la parte de clubes con las etiquetas y las url para editar la bbdd.
+ * CHI - 02/12/2024
+ */
 @RestController
 @RequestMapping("/api/clubs")
 public class ClubController {
 
+	/*
+	 * Llamada al metodo service donde se encuentra toda la logica de la alta, baja, modificacion y muestra de clubes.
+	 * CHI - 02/12/2024
+	 */
     @Autowired
     private ClubService clubService;
 
+    /*
+	 * Método que con el postmapping, la url y la llamada al clubService crea un club.
+	 * CHI - 02/12/2024
+	 */
     // Alta de club
     @PostMapping("/alta")
     public ResponseEntity<String> altaClub(@RequestBody clubDto clubDTO) {
         clubService.crearClub(clubDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body("Club creado con éxito");
     }
-
+    
+    /*
+	 * Método que con el postmapping, la url y la llamada al clubService da de baja un club.
+	 * CHI - 02/12/2024
+	 */
     @PostMapping("/baja")
     public ResponseEntity<String> bajaClub(@RequestBody String nombreClub) {
         try {
@@ -45,7 +60,10 @@ public class ClubController {
     }
 
 
-
+    /*
+	 * Método que con el getmapping, la url y la llamada al clubService muestra todos los clubes y los envia al frontend.
+	 * CHI - 02/12/2024
+	 */
     @GetMapping("/obtenerTodosClubs")
     public ResponseEntity<List<Map<String, Object>>> obtenerTodosClubs() {
         // Obtener todos los clubs del servicio
@@ -76,7 +94,10 @@ public class ClubController {
         }
     }
 
-
+    /*
+	 * Método que con el putmapping, la url y la llamada al clubService edita un club.
+	 * CHI - 02/12/2024
+	 */
     @PutMapping("/modificar/{nombreClub}")
     public ResponseEntity<String> modificarClub(@PathVariable String nombreClub, 
                                                 @RequestBody ModificarClubDto clubDto) {

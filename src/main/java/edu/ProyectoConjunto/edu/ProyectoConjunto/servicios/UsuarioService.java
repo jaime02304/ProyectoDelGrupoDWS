@@ -12,10 +12,18 @@ import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.ModificarUsuarioDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.UsuarioConAliasDto;
 import edu.ProyectoConjunto.edu.ProyectoConjunto.dtos.usuarioDto;
 
+	/*
+	 * Servicio donde se encuentra la logica de los usuarios.
+	 * CHI - 02/12/2024
+	 */
 
 @Service
 public class UsuarioService {
-
+	
+	/*
+	 * Método que llama a usuarioRepositorio que contiene por lo que se va a buscar a los usuarios.
+	 * CHI - 02/12/2024
+	 */
 	@Autowired
     private final usuarioRepositorio usuarioRepositorio;
     //private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Instancia directa
@@ -25,7 +33,10 @@ public class UsuarioService {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
-    
+    /*
+   	 * Método que a traves del correo y la contraseña verifica que el usuario exista en la bbdd y que la contraseña es correcta.
+   	 * CHI - 02/12/2024
+   	 */
     public entidadUsuario verificarUsuario(String correoUsuario, String contraseniaUsuario) {
         System.out.println("Verificando usuario: " + correoUsuario);
         entidadUsuario usuario = usuarioRepositorio.findByCorreoUsuario(correoUsuario);
@@ -44,7 +55,11 @@ public class UsuarioService {
         }
         return null;
     }
-    
+   
+    /*
+   	 * Método que con que se crea un usuario a la bbdd.
+   	 * CHI - 02/12/2024
+   	 */
     
  // Método en UsuarioService
     public void crearUsuario(usuarioDto usuarioDTO) {

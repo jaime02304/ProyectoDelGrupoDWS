@@ -9,7 +9,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 /**
- * Clase donde se encuentra la representación del objeto usuario
+ * Entidad que representa a la tabla de usuarios
+ * CHI - 04/12/2024
  */
 @Entity
 @Table(name = "usuarios")
