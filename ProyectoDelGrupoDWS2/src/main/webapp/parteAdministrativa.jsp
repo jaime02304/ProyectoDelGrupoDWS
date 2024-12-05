@@ -63,57 +63,102 @@
 						<button class="eliminaClub">ELiminar</button>
 						<button class="modificaClub">Modificar</button>
 					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<p class="DNI">SEDE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
-					<div class="contenidoUsuarios">
-						<p class="alias">NOMBRE</p>
-						<button class="eliminaClub">ELiminar</button>
-						<button class="modificaClub">Modificar</button>
-					</div>
 				</div>
 				<button class="aniadirClub">AÑADIR CLUB</button>
 			</div>
 		</div>
-	</main>
 
+
+		<!-- Modal para añadir usuario -->
+		<div class="modal fade" id="aniadirUsuarioModal" tabindex="-1"
+			aria-labelledby="aniadirUsuarioModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="aniadirUsuarioModalLabel">Añadir
+							Usuario</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="formAniadirUsuario" method="post"
+							action="${pageContext.request.contextPath}/paginaAdministradora/crearUsu"
+							method="post">
+							<!-- Campos del formulario -->
+							<div class="mb-3">
+								<label for="nombre" class="form-label">Nombre</label> <input
+									type="text" class="form-control" id="nombreUsu"
+									name="nombreUsu" value="${usuarios.nombreUsu}" required>
+							</div>
+							<div class="mb-3">
+								<label for="apellido" class="form-label">Apellido</label> <input
+									type="text" class="form-control" id="apellidoUsu"
+									name="apellidoUsu" value="${usuarios.apellidoUsu}" required>
+							</div>
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label> <input
+									type="email" class="form-control" id="correoUsu"
+									name="correoUsu" value="${usuarios.correoUsu}" required>
+							</div>
+							<div class="mb-3">
+								<label for="contrasena" class="form-label">Contraseña</label> <input
+									type="password" class="form-control" id="contraseniaUsu"
+									value="${usuarios.contraseniaUsu}" name="contraseniaUsu"
+									required>
+							</div>
+							<div class="mb-3">
+								<label for="dni" class="form-label">DNI</label> <input
+									type="text" class="form-control" id="dNIusu" name="dNIusu"
+									value="${usuarios.dNIusu}" required>
+							</div>
+							<div class="mb-3">
+								<label for="imagen" class="form-label">Imagen (opcional)</label>
+								<input type="file" class="form-control" id="imagenUsu"
+									value="${usuarios.imagenUsu}" name="imagenUsu">
+							</div>
+							<div class="mb-3">
+								<label for="direccion" class="form-label">Dirección</label> <input
+									type="text" class="form-control" id="direccionUsu"
+									value="${usuarios.direccionUsu}" name="direccionUsu" required>
+							</div>
+							<div class="mb-3">
+								<label for="alias" class="form-label">Alias</label> <input
+									type="text" class="form-control" id="alias" name="alias"
+									value="${usuarios.alias}" required>
+							</div>
+							<div class="mb-3">
+								<label for="club" class="form-label">Club al que
+									pertenece</label> <input type="text" class="form-control"
+									id="clubPerteneciente" name="clubPerteneciente"
+									value="${usuarios.clubPerteneciente}">
+							</div>
+							<!-- 							<div class="form-check divCheckbox"> -->
+							<!-- 								Checkbox con valor "true" cuando está marcado -->
+							<!-- 								<input class="form-check-input recuerdame" type="checkbox" -->
+							<!-- 									id="admin" name="admin" value="true" /> -->
+							<!-- 								Campo oculto para enviar "false" cuando no esté marcado -->
+							<!-- 								<input type="hidden" name="admin" value="false" /> <label -->
+							<!-- 									class="form-check-label labelRecuerdame" for="admin"> -->
+							<!-- 									¿Es administrador? </label> -->
+							<!-- 							</div> -->
+							<button type="submit" class="btn btn-primary">Añadir</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			$('.aniadirUsuario').click(function() {
+				$('#aniadirUsuarioModal').modal('show');
+			});
+		});
+	</script>
 
 </body>
 </html>

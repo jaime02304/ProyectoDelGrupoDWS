@@ -27,7 +27,12 @@ public class indexControlador {
 		vista.setViewName("index");
 		return vista;
 	}
-
+/**
+ * Metodo que te cierra la sesion del usuario
+ * @author jpribio - 05/12/24
+ * @param sesionCerrada la sesion
+ * @return devuelve la vista nueva del index modificada
+ */
 	@GetMapping("/cerrarSesion")
 	public ModelAndView cerrarSession(HttpSession sesionCerrada) {
 		sesionCerrada.invalidate();
