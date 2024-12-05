@@ -66,14 +66,14 @@ public class UsuarioService {
         // Convertir el DTO a la entidad
         entidadUsuario nuevoUsuario = new entidadUsuario();
         
-        nuevoUsuario.setNombreUsuario(usuarioDTO.getNombreUsuario());
-        nuevoUsuario.setApellidoUsuario(usuarioDTO.getApellidoUsuario());
-        nuevoUsuario.setCorreoUsuario(usuarioDTO.getCorreoUsuario());
-        nuevoUsuario.setContraseniaUsuario(usuarioDTO.getContraseniaUsuario());
-        nuevoUsuario.setDniUsuario(usuarioDTO.getDniUsuario());
+        nuevoUsuario.setNombreUsuario(usuarioDTO.getNombreUsu());
+        nuevoUsuario.setApellidoUsuario(usuarioDTO.getApellidoUsu());
+        nuevoUsuario.setCorreoUsuario(usuarioDTO.getCorreoUsu());
+        nuevoUsuario.setContraseniaUsuario(usuarioDTO.getContraseniaUsu());
+        nuevoUsuario.setDniUsuario(usuarioDTO.getdNIUsu());
         nuevoUsuario.setEsAdmin(usuarioDTO.getEsAdmin());
-        nuevoUsuario.setImagenUsuario(usuarioDTO.getImagenUsuario());
-        nuevoUsuario.setDireccion(usuarioDTO.getDireccion());
+        nuevoUsuario.setImagenUsuario(usuarioDTO.getImagenUsu());
+        nuevoUsuario.setDireccion(usuarioDTO.getDireccionUsu());
         nuevoUsuario.setAlias(usuarioDTO.getAlias());
         // nuevoUsuario.setClubPerteneciente(usuarioDTO.getClubPerteneciente());
 

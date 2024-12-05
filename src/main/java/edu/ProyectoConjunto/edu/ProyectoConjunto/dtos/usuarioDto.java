@@ -1,121 +1,106 @@
 package edu.ProyectoConjunto.edu.ProyectoConjunto.dtos;
 
+/**
+ * Clase donde se encuentra los atributos de los usuarios DTO completos
+ * @author jpribio - 05/12/24
+ */
 public class usuarioDto {
-     long idUsuario;
-     String nombreUsuario;
-     String apellidoUsuario;
-     String correoUsuario;
-     String contraseniaUsuario;
-     String dniUsuario;
-     Boolean esAdmin;
-     byte[] imagenUsuario; // Imagen como array de bytes
-     String direccion;
-     String alias;
-     String clubPerteneciente;
+     Long idUsuario;
+ 	String nombreUsu = "aaaaa";
+ 	String apellidoUsu = "aaaaa";
+ 	Boolean esAdmin = false;
+ 	byte[] imagenUsu;
+ 	String direccionUsu = "aaaaa";
+ 	String alias = "aaaaa";
+ 	String correoUsu = "aaaaa";
+ 	String contraseniaUsu = "aaaaa";
+ 	String dNIUsu = "aaaaa";
+ 	String clubPerteneciente = "aaaaa";
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public String getNombreUsu() {
+		return nombreUsu;
+	}
+	public void setNombreUsu(String nombreUsu) {
+		this.nombreUsu = nombreUsu;
+	}
+	public String getApellidoUsu() {
+		return apellidoUsu;
+	}
+	public void setApellidoUsu(String apellidoUsu) {
+		this.apellidoUsu = apellidoUsu;
+	}
+	public Boolean getEsAdmin() {
+		return esAdmin;
+	}
+	public void setEsAdmin(Boolean esAdmin) {
+		this.esAdmin = esAdmin;
+	}
+	public byte[] getImagenUsu() {
+		return imagenUsu;
+	}
+	public void setImagenUsu(byte[] imagenUsu) {
+		this.imagenUsu = imagenUsu;
+	}
+	public String getDireccionUsu() {
+		return direccionUsu;
+	}
+	public void setDireccionUsu(String direccionUsu) {
+		this.direccionUsu = direccionUsu;
+	}
+	public String getAlias() {
+		return alias;
+	}
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+	public String getCorreoUsu() {
+		return correoUsu;
+	}
+	public void setCorreoUsu(String correoUsu) {
+		this.correoUsu = correoUsu;
+	}
+	public String getContraseniaUsu() {
+		return contraseniaUsu;
+	}
+	public void setContraseniaUsu(String contraseniaUsu) {
+		this.contraseniaUsu = contraseniaUsu;
+	}
+	public String getdNIUsu() {
+		return dNIUsu;
+	}
+	public void setdNIUsu(String dNIUsu) {
+		this.dNIUsu = dNIUsu;
+	}
+	public String getClubPerteneciente() {
+		return clubPerteneciente;
+	}
+	public void setClubPerteneciente(String clubPerteneciente) {
+		this.clubPerteneciente = clubPerteneciente;
+	}
+	public usuarioDto(Long idUsuario, String nombreUsu, String apellidoUsu, Boolean esAdmin, byte[] imagenUsu,
+			String direccionUsu, String alias, String correoUsu, String contraseniaUsu, String dNIUsu,
+			String clubPerteneciente) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombreUsu = nombreUsu;
+		this.apellidoUsu = apellidoUsu;
+		this.esAdmin = esAdmin;
+		this.imagenUsu = imagenUsu;
+		this.direccionUsu = direccionUsu;
+		this.alias = alias;
+		this.correoUsu = correoUsu;
+		this.contraseniaUsu = contraseniaUsu;
+		this.dNIUsu = dNIUsu;
+		this.clubPerteneciente = clubPerteneciente;
+	}
+	public usuarioDto() {
+		super();
+	}
 
-    // Constructor
-    public usuarioDto(Long idUsuario, String nombreUsuario, String apellidoUsuario, String correoUsuario, 
-                      String contraseniaUsuario, String dniUsuario, Boolean esAdmin, byte[] imagenUsuario, 
-                      String direccion, String alias, String clubPerteneciente) {
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.apellidoUsuario = apellidoUsuario;
-        this.correoUsuario = correoUsuario;
-        this.contraseniaUsuario = contraseniaUsuario;
-        this.dniUsuario = dniUsuario;
-        this.esAdmin = esAdmin;
-        this.imagenUsuario = imagenUsuario;
-        this.direccion = direccion;
-        this.alias = alias;
-        this.clubPerteneciente = clubPerteneciente;
-    }
-
-    // Getters y setters
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getApellidoUsuario() {
-        return apellidoUsuario;
-    }
-
-    public void setApellidoUsuario(String apellidoUsuario) {
-        this.apellidoUsuario = apellidoUsuario;
-    }
-
-    public String getCorreoUsuario() {
-        return correoUsuario;
-    }
-
-    public void setCorreoUsuario(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
-    }
-
-    public String getContraseniaUsuario() {
-        return contraseniaUsuario;
-    }
-
-    public void setContraseniaUsuario(String contraseniaUsuario) {
-        this.contraseniaUsuario = contraseniaUsuario;
-    }
-
-    public String getDniUsuario() {
-        return dniUsuario;
-    }
-
-    public void setDniUsuario(String dniUsuario) {
-        this.dniUsuario = dniUsuario;
-    }
-
-    public Boolean getEsAdmin() {
-        return esAdmin;
-    }
-
-    public void setEsAdmin(Boolean esAdmin) {
-        this.esAdmin = esAdmin;
-    }
-
-    public byte[] getImagenUsuario() {
-        return imagenUsuario;
-    }
-
-    public void setImagenUsuario(byte[] imagenUsuario) {
-        this.imagenUsuario = imagenUsuario;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getClubPerteneciente() {
-        return clubPerteneciente;
-    }
-
-    public void setClubPerteneciente(String clubPerteneciente) {
-        this.clubPerteneciente = clubPerteneciente;
-    }
+	
 }
